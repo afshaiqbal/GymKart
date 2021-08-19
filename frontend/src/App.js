@@ -3,55 +3,69 @@ import './App.css';
 import {BrowserRouter, Route,Link} from 'react-router-dom';
 import Homescreen from './Screens/HomeScreen';
 import ProductScreen from './Screens/ProductScreen';
+import SignIn from './Screens/signin';
+import Cart from './Screens/cart';
 
 function App() {
-  const openMenu=()=>{
-    document.querySelector(".sidebar").classList.add("open");
+//   const openMenu=()=>{
+//     document.querySelector(".sidebar").classList.add("open");
+//   }
+//   const closeMenu=()=>{
+//     document.querySelector(".sidebar").classList.remove("open");
+//   }
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
   }
-  const closeMenu=()=>{
-    document.querySelector(".sidebar").classList.remove("open");
+  
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
   }
   return (
-    <BrowserRouter>
-    <div className="grid-container">
-    <header className="header">
-        <div className="brand">
-            <button onClick={openMenu}>
-                &#9776;
-            </button>
-            <Link to ="/">GymKart</Link>
-        </div>
-        <div className="header-links">
-            <a href="cart.html">Cart </a>
-            <a href="signin"> Sign in</a>
-        </div>
-    </header>
-    <aside className="sidebar">
-        <h3>Shopping Categories</h3>
-        <button className="sidebar-close-button" onClick={closeMenu}>x</button>
-        <ul>
+     <BrowserRouter>
+     <div className="grid-container">
+  <header className="header">
+         <div className="brand">
+            <button onClick={openNav}>
+                 &#9776;
+             </button>
+             <Link to ="/">GymKart</Link>
+         </div>
+         <div className="header-links">
+             <Link to="/cart">Cart </Link>
+             <Link to ="/signin"> Sign in</Link>
+         </div>
+     </header>
+    <aside className="sidebar" id="mySidenav">
+          <h3> Shopping Categories</h3>
+        <button className="sidebar-close-button" onClick={closeNav}>x</button>         <ul>
             <li>
                 <a href="index.html">Tracks</a>
-            </li>
-            <li>
+           </li>
+           <li>
                 <a href="index.html">Shoes</a>
-            </li>
-        </ul>
-    </aside>
-    <main className="main">
-        <div className="content">
-          <Route path="/product/:id" component={ProductScreen}/>
+           </li>
+       </ul>
+   </aside>
+    <main className="main" id="main">
+         <div className="content">
+                <Route exact path="/cart" component= {Cart}/>
+            <Route exact path="/signin" component={SignIn}/>
+           <Route path="/product/:id" component={ProductScreen}/>
           <Route path="/" exact={true} component={Homescreen}/>
             
         </div>
    
 
-    </main>
+     </main>
     <footer className="footer">
         All rights reserved.
-    </footer>
-</div>
-</BrowserRouter>
+     </footer>
+ </div>
+ </BrowserRouter>
+
+
   );
 }
 
